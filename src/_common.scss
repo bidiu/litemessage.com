@@ -1,0 +1,60 @@
+// This file cannot contain any rule that outputs plain css.
+// Otherwise, the output will be duplicated after the build.
+// Component stlyes can import this file. However, `index.scss`
+// has more css classes that could be directly used on templates.
+
+// font weights
+$font-weight-light: 100;
+$font-weight-primary: 300;
+$font-weight-bold: 400;
+$font-weight-black: 700;
+
+// font sizes
+$font-size-tiny: 1.2rem;
+$font-size-small: 1.4rem;
+$font-size-primary: 1.6rem;
+$font-size-big: 2.4rem;
+
+// font families
+$font-family-primary: 'Roboto', sans-serif;
+
+@mixin font($font-weight, $font-size, $font-family) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  font-family: $font-family;
+}
+
+// text colors
+$text-color-primary: #333333;
+$text-color-var1: #ffffff;
+$text-color-var2: #eeeeee;
+$text-color-var3: #c7c4c3;
+$text-color-var4: #777777;
+
+// link colors
+$link-color-primary: #6a98e2;
+$link-color-var1: #ef5353;
+
+// background colors
+$bg-color-dark: #2e3235;
+$bg-color-dark-var1: #4b5058;
+$bg-color-light: #ffffff;
+$bg-color-warning: #ffcc00;
+$bg-color-critical: #ef5353;
+
+// theme colors
+$theme-color-primary: salmon;
+$phishing-color: salmon;
+$normal-color: #5e5e5e;
+
+// box shadows
+$box-shadow: 0 0 1px 1px rgba(20, 23, 28, .1), 2px 2px 1px 0 rgba(20, 23, 28, .1);
+$box-shadow-focus: 0 2px 8px 2px rgba(20, 23, 28, .15);
+
+// z-index
+$z-index-navbar: 1000;
+$z-index-overlay: 2000;
+$z-index-bubble: 3000;
+$z-index-fullscreen-shade: 4000;
+$z-index-fullscreen-overlay: 5000;
+$z-index-toast: 6000;

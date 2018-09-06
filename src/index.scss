@@ -1,0 +1,192 @@
+@import '_common';
+@import '_reset';
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 0) and (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media (min-width: 1025px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+
+.font-primary {
+  @include font($font-weight-primary, $font-size-primary, $font-family-primary);
+}
+
+.font-primary-light {
+  @include font($font-weight-light, $font-size-primary, $font-family-primary);
+}
+
+.font-primary-bold {
+  @include font($font-weight-bold, $font-size-primary, $font-family-primary);
+}
+
+.font-primary-black {
+  @include font($font-weight-black, $font-size-primary, $font-family-primary);
+}
+
+.font-big {
+  @include font($font-weight-primary, $font-size-big, $font-family-primary);
+}
+
+.font-big-light {
+  @include font($font-weight-light, $font-size-big, $font-family-primary);
+}
+
+.font-big-bold {
+  @include font($font-weight-bold, $font-size-big, $font-family-primary);
+}
+
+.font-big-black {
+  @include font($font-weight-black, $font-size-big, $font-family-primary);
+}
+
+.font-small {
+  @include font($font-weight-primary, $font-size-small, $font-family-primary);
+}
+
+.font-small-light {
+  @include font($font-weight-light, $font-size-small, $font-family-primary);
+}
+
+.font-small-bold {
+  @include font($font-weight-bold, $font-size-small, $font-family-primary);
+}
+
+.font-small-black {
+  @include font($font-weight-black, $font-size-small, $font-family-primary);
+}
+
+.font-tiny {
+  @include font($font-weight-primary, $font-size-tiny, $font-family-primary);
+}
+
+.font-tiny-light {
+  @include font($font-weight-light, $font-size-tiny, $font-family-primary);
+}
+
+.font-tiny-bold {
+  @include font($font-weight-bold, $font-size-tiny, $font-family-primary);
+}
+
+.font-tiny-black {
+  @include font($font-weight-black, $font-size-tiny, $font-family-primary);
+}
+
+
+.ink-popup {
+  border-radius: 2px;
+  box-shadow: $box-shadow;
+}
+
+.ink-popup-focus {
+  border-radius: 2px;
+  box-shadow: $box-shadow-focus;
+}
+
+.ink-link {
+  cursor: pointer;
+}
+.ink-link:hover {
+  color: $link-color-primary;
+}
+
+.ink-link-var1 {
+  cursor: pointer;
+}
+.ink-link-var1:hover {
+  color: $link-color-var1;
+}
+
+.ink-link-var2 {
+  cursor: pointer;
+}
+.ink-link-var2:hover {
+  text-decoration: underline;
+}
+
+
+// for sizing material icons
+.material-icons.md-18 { font-size: 1.8rem; }
+.material-icons.md-24 { font-size: 2.4rem; }
+.material-icons.md-36 { font-size: 3.6rem; }
+.material-icons.md-48 { font-size: 4.8rem; }
+
+// for using icons as black on a light background
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+// for using icons as white on a dark background
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+
+.bg-color-dark {
+  background-color: $bg-color-dark;
+}
+
+.bg-color-dark-var1 {
+  background-color: $bg-color-dark-var1;
+}
+
+.bg-color-light {
+  background-color: $bg-color-light;
+}
+
+.bg-color-warning {
+  background-color: $bg-color-warning;
+}
+
+.bg-color-critical {
+  background-color: $bg-color-critical;
+}
+
+
+.text-color-primary {
+  color: $text-color-primary;
+}
+
+.text-color-var1 {
+  color: $text-color-var1;
+}
+
+.text-color-var2 {
+  color: $text-color-var2;
+}
+
+.text-color-var3 {
+  color: $text-color-var3;
+}
+
+.text-color-var4 {
+  color: $text-color-var4;
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// animation key frames
+@keyframes rotate-full-round {
+  from {}
+  to {
+    transform: rotateZ(360deg)
+  }
+}
