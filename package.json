@@ -1,12 +1,25 @@
 {
-  "name": "litemessage-dot-com",
+  "name": "litemessage.com",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "clear-sass-cache": "rm -rf ./sass-cache",
+    "watch-scss": "npm run clear-sass-cache && sass --load-path ./src --sourcemap=none --watch ./src:./src",
+    "build-css": "npm run clear-sass-cache && sass --load-path ./src --sourcemap=none --update ./src:./src",
+    "build-production": "npm run build-css && react-scripts build",
+    "serve-build": "serve -sp 3000 build",
+    "start": "concurrently --raw \"npm run watch-scss\" \"react-scripts start\"",
+    "start-production": "npm run build-production && npm run serve-build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "clone": "^2.1.1",
     "core-js": "^2.5.7",
     "css-element-queries": "^1.0.1",
     "deep-eql": "^3.0.1",
+    "litemessage": "^0.8.0",
+    "particlesjs": "^2.2.3",
     "promise-polyfill": "^7.0.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
@@ -20,17 +33,6 @@
     "redux-observable": "^0.17.0",
     "rxjs": "^5.5.6",
     "whatwg-fetch": "^2.0.3"
-  },
-  "scripts": {
-    "clear-sass-cache": "rm -rf ./sass-cache",
-    "watch-scss": "npm run clear-sass-cache && sass --load-path ./src --sourcemap=none --watch ./src:./src",
-    "build-css": "npm run clear-sass-cache && sass --load-path ./src --sourcemap=none --update ./src:./src",
-    "build-production": "npm run build-css && react-scripts build",
-    "serve-build": "serve -sp 3000 build",
-    "start": "concurrently --raw \"npm run watch-scss\" \"react-scripts start\"",
-    "start-production": "npm run build-production && npm run serve-build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
