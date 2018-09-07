@@ -1,0 +1,54 @@
+@import '_common';
+
+$nav-bar-height: 80px;
+
+.Navbar {
+  display: flex;
+  height: $nav-bar-height;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.Navbar div {
+  flex-shrink: 0;
+  height: 100%;
+  line-height: $nav-bar-height;
+  box-sizing: border-box;
+}
+
+.Navbar .logo {
+  flex-grow: 1;
+}
+
+.Navbar .logo-anchor {
+  display: inline-block;
+  height: 100%;
+}
+
+.Navbar .tab {
+  padding: 0 16px;
+  cursor: pointer;
+  position: relative;
+  opacity: .7;
+  transition: .3s;
+}
+
+.Navbar .tab span {
+  display: inline-block;
+  padding-left: 4px;
+}
+
+.Navbar .tab:hover {
+  opacity: 1;
+}
+
+.Navbar .tab:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 2px;
+  width: 100%;
+  background: $theme-color-primary;
+}

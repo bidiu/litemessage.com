@@ -6,6 +6,7 @@ import { ThinNode } from 'litemessage/dist/litemessage.umd';
 import ViewportQuery from './common/ui/viewports/ViewportQuery';
 import BannerList from './common/ui/banners/BannerList';
 import ToastList from './common/ui/toasts/ToastList';
+import Navbar from './navbar/Navbar';
 import env from './env/environment';
 
 import './App.css';
@@ -14,7 +15,11 @@ class App extends Component {
   componentDidMount() {
     // draw the background with particle effects
     Particles.init({
-      selector: '#particles'
+      selector: '#particles',
+      maxParticles: 50,
+      connectParticles: true,
+      speed: .2,
+      color: '#cccccc'
     });
 
     // join into the network
@@ -29,7 +34,9 @@ class App extends Component {
         <ViewportQuery />
         <BannerList />
         <ToastList />
+
         {/* the main content of the app */}
+        <Navbar />
         <div>Hello, world.</div>
       </div>
     );
