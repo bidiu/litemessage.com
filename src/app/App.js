@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 import Particles from 'particlesjs/dist/particles';
-import { ThinNode } from 'litemessage/dist/litemessage.umd';
 import ViewportQuery from './common/ui/viewports/ViewportQuery';
 import BannerList from './common/ui/banners/BannerList';
 import ToastList from './common/ui/toasts/ToastList';
 import Navbar from './navbar/Navbar';
 import env from './env/environment';
+
+import worker from 'workerize-loader!./litemessage.worker'; // eslint-disable-line
 
 import './App.css';
 
@@ -22,8 +23,10 @@ class App extends Component {
       color: '#cccccc'
     });
 
+    // create the litemessage worker
+    this.worker = worker();
     // join into the network
-    this.node = new ThinNode('litemessage', { initPeerUrls: env.initPeerUrls });
+    this.worker.createNode('litemessage', env.initPeerUrls);
   }
 
   render() {

@@ -30,7 +30,7 @@ $nav-bar-height: 80px;
   padding: 0 16px;
   cursor: pointer;
   position: relative;
-  opacity: .7;
+  opacity: .8;
   transition: .3s;
 }
 
@@ -43,12 +43,18 @@ $nav-bar-height: 80px;
   opacity: 1;
 }
 
-.Navbar .tab:hover::after {
+.Navbar .tab::after {
   content: "";
   position: absolute;
   bottom: 0;
   right: 0;
   height: 2px;
   width: 100%;
+  opacity: 0;
   background: $theme-color-primary;
+  transition: .3s;
+}
+
+.Navbar .tab:hover::after {
+  opacity: 1;
 }
