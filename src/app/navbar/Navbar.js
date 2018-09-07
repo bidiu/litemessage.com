@@ -10,7 +10,7 @@ class Navbar extends Component {
           <a className="logo-anchor" href="#">litemessage</a>
         </div>
         <div className="tab">
-          <i class="fab fa-connectdevelop"></i>
+          <i className="fab fa-connectdevelop"></i>
           <span>Peers</span>
         </div>
         <div className="tab">
@@ -18,8 +18,12 @@ class Navbar extends Component {
           <span className="github">Github</span>
         </div>
         <div className="tab">
-          <i class="fas fa-terminal"></i>
+          <i className="fas fa-terminal"></i>
           <span>Geek</span>
+        </div>
+        <div className="tab">
+          <i className="fas fa-question-circle"></i>
+          <span>About</span>
         </div>
       </div>
     );
