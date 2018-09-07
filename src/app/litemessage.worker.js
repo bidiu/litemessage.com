@@ -1,5 +1,5 @@
 /*
- * Later when ready, this worker will be published with its own library.
+ * Later when ready, this worker will be published as its own library.
  */
 
 import { ThinNode } from 'litemessage/dist/litemessage.umd';

@@ -5,11 +5,12 @@ import Particles from 'particlesjs/dist/particles';
 import ViewportQuery from './common/ui/viewports/ViewportQuery';
 import BannerList from './common/ui/banners/BannerList';
 import ToastList from './common/ui/toasts/ToastList';
-import Navbar from './navbar/Navbar';
+import Home from './home/Home';
 import env from './env/environment';
 
 import worker from 'workerize-loader!./litemessage.worker'; // eslint-disable-line
 
+import { pushBlocks } from './common/state/blockchain/index';
 import './App.css';
 
 class App extends Component {
@@ -27,6 +28,11 @@ class App extends Component {
     this.worker = worker();
     // join into the network
     this.worker.createNode('litemessage', env.initPeerUrls);
+
+    setTimeout(async () => {
+      this.props.pushBlocks(await this.worker.getBlocks());
+
+    }, 3000);
   }
 
   render() {
@@ -39,8 +45,7 @@ class App extends Component {
         <ToastList />
 
         {/* the main content of the app */}
-        <Navbar />
-        <div>Hello, world.</div>
+        <Home />
       </div>
     );
   }
@@ -48,7 +53,11 @@ class App extends Component {
 
 export default withRouter(connect(
   state => ({
-    viewportType: state.ui.viewportType
+    viewportType: state.ui.viewportType,
   }),
-  dispatch => ({})
+  dispatch => ({
+    pushBlocks(blocks) {
+      dispatch(pushBlocks(blocks));
+    }
+  })
 )(App));

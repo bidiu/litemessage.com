@@ -5,12 +5,11 @@
 const genActionCreator = (type, ...argNames) => {
   return function (...args) {
     let action = { type };
-    let payload = {};
 
     argNames.forEach((arg, index) => {
-      payload[argNames[index]] = args[index]
+      action[argNames[index]] = args[index]
     });
-    return { ...action, payload };
+    return action;
   }
 };
 
