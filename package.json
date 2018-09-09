@@ -18,7 +18,7 @@
     "core-js": "^2.5.7",
     "css-element-queries": "^1.0.1",
     "deep-eql": "^3.0.1",
-    "litemessage": "^0.10.2",
+    "litemessage": "^0.10.7",
     "particlesjs": "^2.2.3",
     "promise-polyfill": "^7.0.0",
     "react": "^16.4.0",

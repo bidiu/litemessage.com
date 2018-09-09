@@ -3,6 +3,7 @@ import { genActionCreator, genActionTypeCreator } from '../../../utils/stateUtil
 
 import blocks from './blocks';
 import chain from './chain';
+import head from './head';
 
 const genActionType = genActionTypeCreator('blockchain');
 
@@ -14,7 +15,7 @@ const pushBlocks = genActionCreator(PUSH_BLOCKS, 'blocks');
 const unshiftBlocks = genActionCreator(UNSHIFT_BLOCKS, 'blocks');
 const switchBranch = genActionCreator(SWITCH_BRANCH, 'blocks');
 
-const blockchain = combineReducers({ blocks, chain });
+const blockchain = combineReducers({ blocks, chain, head });
 
 export {
   pushBlocks, PUSH_BLOCKS,

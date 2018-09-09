@@ -9,7 +9,9 @@ const blocks = (state = {}, { type, blocks }) => {
     case SWITCH_BRANCH:
       let nextState = { ...state };
       for (let block of blocks) {
-        nextState[block.hash] = block;
+        if (!nextState[block.hash]) {
+          nextState[block.hash] = block;
+        }
       }
       return nextState;
 
