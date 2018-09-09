@@ -1,0 +1,14 @@
+@import '_common';
+
+.Block {
+  box-shadow: $box-shadow-var1;
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 60px;
+  border-radius: 4px;
+  height: 200px;
+}
+
+.Block:last-child {
+  margin-bottom: 0;
+}
