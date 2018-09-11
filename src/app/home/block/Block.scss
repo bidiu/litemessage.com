@@ -1,14 +1,78 @@
 @import '_common';
 
+$block-padding: 30px;
+$vp-mobile-block-padding: 14px;
+
 .Block {
+  position: relative;
   box-shadow: $box-shadow-var1;
   background-color: #ffffff;
-  padding: 20px;
-  margin-bottom: 60px;
+  padding: $block-padding;
+  margin-bottom: 80px;
   border-radius: 4px;
-  height: 200px;
+  cursor: pointer;
+  max-width: 540px;
+  color: #777777;
+}
+
+.Block:hover {
+  box-shadow: $box-shadow-var2;
+}
+
+.VIEWPORT_MOBILE .Block {
+  padding: $vp-mobile-block-padding;
+  margin-bottom: 20px;
+}
+
+.VIEWPORT_IPAD .Block:not(:last-child)::after,
+.VIEWPORT_DESKTOP .Block:not(:last-child)::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f107";
+  font-size: 32px;
+  font-weight: 900;
+  opacity: .8;
+  position: absolute;
+  right: calc(50% - 16px);
+  bottom: -56px;
+  cursor: default;
 }
 
 .Block:last-child {
   margin-bottom: 0;
+}
+
+.Block .info-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  padding: 6px 0;
+}
+
+.Block .info-row:first-child {
+  padding-top: 0;
+}
+
+.Block .info-row:last-of-type {
+  padding: 14px 0 0 0;
+}
+
+.Block .info-name {
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.Block .block-title {
+  color: $text-color-primary;
+  font-size: 3.2rem;
+}
+
+.Block .block-nonce {
+  position: absolute;
+  bottom: $block-padding + 4px;
+  right: $block-padding;
+}
+
+.VIEWPORT_MOBILE .Block .block-nonce {
+  bottom: $vp-mobile-block-padding + 4px;
+  right: $vp-mobile-block-padding;
 }

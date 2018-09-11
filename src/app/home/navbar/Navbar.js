@@ -18,7 +18,7 @@ class Navbar extends Component {
           <span className="github">Github</span>
         </div>
         <div className="tab">
-          <i className="far fa-laugh-wink"></i>
+          <i className="far fa-laugh"></i>
           <span>Geek</span>
         </div>
         <div className="tab">

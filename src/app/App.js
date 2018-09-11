@@ -17,7 +17,7 @@ class App extends Component {
     // draw the background with particle effects
     Particles.init({
       selector: '#particles',
-      maxParticles: 50,
+      maxParticles: 60,
       connectParticles: true,
       speed: .2,
       color: '#cccccc'

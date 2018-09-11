@@ -183,6 +183,48 @@ html {
   text-overflow: ellipsis;
 }
 
+.console-print {
+  color: rgb(111, 211, 111);
+  background-color: rgb(230, 248, 230);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgb(111, 211, 111);
+}
+
+.console-print-var1 {
+  color: rgb(111, 211, 111);
+  padding: 2px 6px;
+}
+
+.console-print-var2 {
+  color: $text-color-primary;
+  background-color: #fcfcfc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+}
+
+
+// some responsive helpers
+.vp-mobile-show {
+  position: fixed !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+.VIEWPORT_MOBILE .vp-mobile-show {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.VIEWPORT_MOBILE .vp-mobile-hide {
+  position: fixed !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+
 // animation key frames
 @keyframes rotate-full-round {
   from {}
