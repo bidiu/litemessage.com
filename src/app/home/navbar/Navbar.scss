@@ -1,29 +1,39 @@
 @import '_common';
 
 $nav-bar-height: 80px;
+$nav-bar-height-collapse: 56px;
 
 .Navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  top: 0;
+  left: 0;
   display: flex;
   height: $nav-bar-height;
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
+  transition: .3s;
+}
+
+.Navbar.collapse {
+  height: $nav-bar-height-collapse;
+  background-color: $bg-color-dark;
+  box-shadow: $box-shadow;
+  color: $text-color-var1;
 }
 
 .Navbar div {
   flex-shrink: 0;
   height: 100%;
-  line-height: $nav-bar-height;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 .Navbar .logo {
   flex-grow: 1;
-}
-
-.Navbar .logo-anchor {
-  display: inline-block;
-  height: 100%;
 }
 
 .Navbar .tab {
@@ -43,6 +53,10 @@ $nav-bar-height: 80px;
   opacity: 1;
 }
 
+.Navbar.collapse .tab:hover {
+  background-color: $bg-color-dark-var1;
+}
+
 .Navbar .tab::after {
   content: "";
   position: absolute;
@@ -53,6 +67,10 @@ $nav-bar-height: 80px;
   opacity: 0;
   background: $theme-color-primary;
   transition: .3s;
+}
+
+.Navbar.collapse .tab::after {
+  background: $text-color-var1;
 }
 
 .Navbar .tab:hover::after {

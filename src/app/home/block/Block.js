@@ -12,12 +12,14 @@ const Block = ({ block }) => {
         <span className="info-name font-small text-truncate">BLOCK HASH</span>&nbsp;
         <span className="info-value console-print text-truncate" title={block.hash}>{block.hash}</span>
       </div>
-      <div className="info-row">
-        <span className="info-name font-small text-truncate">PREVIOUS BLOCK</span>&nbsp;
-        <span className="info-value console-print-var1 text-truncate" title={block.prevBlock}>
-          {block.prevBlock}
-        </span>
-      </div>
+      {block.prevBlock && (
+        <div className="info-row">
+          <span className="info-name font-small text-truncate">PREVIOUS BLOCK</span>&nbsp;
+          <span className="info-value console-print-var1 text-truncate" title={block.prevBlock}>
+            {block.prevBlock}
+          </span>
+        </div>
+      )}
       <div className="info-row">
         <span className="info-name font-small text-truncate">MERKLE ROOT</span>&nbsp;
         <span className="info-value console-print-var1 text-truncate" title={block.merkleRoot}>

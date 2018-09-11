@@ -20,7 +20,21 @@ class App extends Component {
       maxParticles: 60,
       connectParticles: true,
       speed: .2,
-      color: '#cccccc'
+      color: '#cccccc',
+      responsive: [
+        {
+          breakpoint: 1024,
+          options: {
+            maxParticles: 30
+          }
+        },
+        {
+          breakpoint: 768,
+          options: {
+            maxParticles: 0
+          }
+        }
+      ]
     });
 
     this.blockchainManager = new BlockchainManager(LitemessageWorker, store);
