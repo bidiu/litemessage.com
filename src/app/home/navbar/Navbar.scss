@@ -24,7 +24,7 @@ $nav-bar-height-collapse: 56px;
   color: $text-color-var1;
 }
 
-.Navbar div {
+.Navbar > div {
   flex-shrink: 0;
   height: 100%;
   box-sizing: border-box;
@@ -75,4 +75,37 @@ $nav-bar-height-collapse: 56px;
 
 .Navbar .tab:hover::after {
   opacity: 1;
+}
+
+.Navbar .sidebar {
+  color: $text-color-var1 !important;
+}
+
+.Navbar .sidebar .tab {
+  color: $text-color-var1 !important;
+  padding: 12px !important;
+}
+
+.Navbar .sidebar .tab:hover {
+  background-color: inherit !important;
+}
+
+.Navbar .sidebar .tab::after {
+  background: $theme-color-primary !important;
+  height: 1px !important;
+}
+
+.Navbar .burger-icon {
+  padding: 16px;
+  transition: .3s;
+  cursor: pointer;
+  opacity: .8;
+}
+
+.Navbar .burger-icon:hover {
+  opacity: 1;
+}
+
+.Navbar.collapse .burger-icon:hover {
+  background-color: $bg-color-dark-var1;
 }
