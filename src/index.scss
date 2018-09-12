@@ -120,6 +120,14 @@ html {
   text-decoration: underline;
 }
 
+.ink-link-var3 {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.ink-link-var3:hover {
+  color: $link-color-primary;
+}
+
 
 // for sizing material icons
 .material-icons.md-18 { font-size: 1.8rem; }

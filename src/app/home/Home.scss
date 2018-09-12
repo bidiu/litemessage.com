@@ -1,3 +1,12 @@
+.Home .Slidedown {
+  padding: 100px 40px 40px 40px;
+}
+
+.VIEWPORT_MOBILE .Home .Slidedown,
+.VIEWPORT_IPAD .Home .Slidedown {
+  padding: 100px 20px 20px 20px;
+}
+
 .Home .Chain {
   margin: 80px auto 0 auto;
   padding: 20px;

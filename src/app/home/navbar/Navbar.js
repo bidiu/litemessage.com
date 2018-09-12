@@ -3,16 +3,29 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 import { Observable } from 'rxjs/Observable';
 import BurgerMenu from '../../common/ui/burger/BurgerMenu';
+import TABS from '../../common/constants/tabs';
 
+import { setTab, unsetTab } from '../../common/state/newui/index';
 import './Navbar.css';
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       collapse: false,
       sidebarOpen: false
     };
+  }
+
+  handleTabClick(tab) {
+    this.setState({ sidebarOpen: false });
+
+    if (this.props.tab === tab) {
+      this.props.unsetTab();
+    } else {
+      this.props.setTab(tab);
+    }
   }
 
   componentDidMount() {
@@ -38,15 +51,15 @@ class Navbar extends Component {
 
     let tabs = (
       <Fragment>
-        <div className="tab">
+        <div className="tab" onClick={this.handleTabClick.bind(this, TABS.PEERS)}>
           <i className="fab fa-connectdevelop"></i>
           <span>Peers</span>
         </div>
-        <div className="tab">
+        <div className="tab" onClick={this.handleTabClick.bind(this, TABS.GITHUB)}>
           <i className="fab fa-github"></i>
           <span className="github">Github</span>
         </div>
-        <div className="tab">
+        <div className="tab" onClick={this.handleTabClick.bind(this, TABS.GEEK)}>
           <i className="far fa-laugh"></i>
           <span>Geek</span>
         </div>
@@ -77,6 +90,14 @@ class Navbar extends Component {
 export default withRouter(connect(
   state => ({
     viewportType: state.ui.viewportType,
+    tab: state.newui.tab
   }),
-  dispatch => ({})
+  dispatch => ({
+    setTab(tab) {
+      dispatch( setTab(tab) );
+    },
+    unsetTab() {
+      dispatch( unsetTab() );
+    }
+  })
 )(Navbar));

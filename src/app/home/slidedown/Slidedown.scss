@@ -1,0 +1,45 @@
+@import '_common';
+
+$min-safe-height: 360px;
+
+.Slidedown {
+  position: fixed;
+  box-sizing: border-box;
+  transition: .3s;
+  width: 100%;
+  top: -$min-safe-height;
+  left: 0;
+  z-index: 100;
+}
+
+.Slidedown.open {
+  top: 0;
+}
+
+.Slidedown .sd-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: -1;
+  opacity: .9;
+}
+
+.Slidedown .close-icon {
+  position: absolute;
+  top: 108px;
+  right: 40px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.VIEWPORT_MOBILE .Slidedown .close-icon,
+.VIEWPORT_IPAD .Slidedown .close-icon {
+  right: 20px;
+}
+
+.Slidedown .close-icon:hover {
+  color: $bg-color-critical;
+}

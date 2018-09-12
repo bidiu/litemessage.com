@@ -1,0 +1,19 @@
+@import '_common';
+
+.Github h1 {
+  margin-bottom: 16px;
+}
+
+.Github .repo-icon {
+  display: inline-block;
+  padding: 0 4px;
+}
+
+.Github .gh-title {
+  margin: 20px 0 12px 0;
+}
+
+.Github .gh-abstract {
+  padding: 0 16px;
+  color: $text-color-var4;
+}
