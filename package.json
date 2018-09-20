@@ -23,7 +23,6 @@
     "particlesjs": "^2.2.3",
     "promise-polyfill": "^7.0.0",
     "react": "^16.4.0",
-    "react-burger-menu": "^2.5.2",
     "react-dom": "^16.4.0",
     "react-media": "^1.6.1",
     "react-redux": "^5.0.7",

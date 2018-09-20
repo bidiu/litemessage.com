@@ -95,6 +95,12 @@ $nav-bar-height-collapse: 56px;
   height: 1px !important;
 }
 
+.Navbar .sidebar-copyright-container {
+  position: absolute;
+  left: 28px;
+  bottom: 12px;
+}
+
 .Navbar .burger-icon {
   padding: 16px;
   transition: .3s;

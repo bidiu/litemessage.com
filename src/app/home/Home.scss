@@ -11,3 +11,17 @@
   margin: 80px auto 0 auto;
   padding: 20px;
 }
+
+.Home .spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.Home .copyright-container {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+}

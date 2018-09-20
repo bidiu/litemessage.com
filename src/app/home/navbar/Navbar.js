@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 import { Observable } from 'rxjs/Observable';
+import Copyright from '../copyright/Copyright';
 import BurgerMenu from '../../common/ui/burger/BurgerMenu';
 import TABS from '../../common/constants/tabs';
 
@@ -94,6 +95,9 @@ class Navbar extends Component {
             onMenuIconClick={() => this.setState({ sidebarOpen: true })}
             onCloseIconClick={() => this.setState({ sidebarOpen: false })}>
             {tabs}
+            <div className="sidebar-copyright-container font-tiny">
+              <Copyright />
+            </div>
           </BurgerMenu>
         )}
       </div>
