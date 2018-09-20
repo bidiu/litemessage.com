@@ -5,23 +5,29 @@ $vp-mobile-block-padding: 14px;
 
 .Block {
   position: relative;
-  box-shadow: $box-shadow-var1;
   background-color: #ffffff;
-  padding: $block-padding;
   margin-bottom: 80px;
-  border-radius: 4px;
   cursor: pointer;
   max-width: 540px;
   color: #777777;
 }
 
-.Block:hover {
+.Block > div {
+  box-shadow: $box-shadow-var1;
+  padding: $block-padding;
+  border-radius: 4px;
+}
+
+.Block > div:hover {
   box-shadow: $box-shadow-var2;
 }
 
 .VIEWPORT_MOBILE .Block {
-  padding: $vp-mobile-block-padding;
   margin-bottom: 20px;
+}
+
+.VIEWPORT_MOBILE .Block > div {
+  padding: $vp-mobile-block-padding;
 }
 
 .VIEWPORT_IPAD .Block:not(:last-child)::after,

@@ -31,18 +31,32 @@ class Navbar extends Component {
   componentDidMount() {
     this.subscriptions = [
       Observable.fromEvent(window, 'scroll')
+        .throttleTime(50)
         .subscribe(() => {
-          if (window.scrollY > 120) {
+          let { collapse } = this.state;
+
+          if (window.scrollY > 120 && !collapse) {
             this.setState({ collapse: true });
-          } else {
+          } else if (window.scrollY <= 120 && collapse) {
             this.setState({ collapse: false });
           }
         })
+    ];
+
+    this.timers = [
+      setInterval(() => {
+        let { collapse } = this.state;
+
+        if (window.scrollY <= 120 && collapse) {
+          this.setState({ collapse: false });
+        }
+      }, 500)
     ];
   }
 
   componentWillUnmount() {
     this.subscriptions.forEach(s => s.unsubscribe());
+    this.timers.forEach(t => clearInterval(t));
   }
 
   render() {
