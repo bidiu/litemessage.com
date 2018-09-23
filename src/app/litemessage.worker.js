@@ -32,3 +32,8 @@ export function getHeadBlockId() {
 export function getSubBlockchain(until, length) {
   return self.blockchain.getSubBlockchain(until, length);
 }
+
+export function getPeers(nodeTypes = '*') {
+  return self.node.peers(nodeTypes)
+    .map(peer => peer.toJSON());
+}

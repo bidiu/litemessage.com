@@ -46,7 +46,7 @@ class Home extends Component {
           <div className="spinner-container">
             <DotSpinner />
             <div>
-              Fetching blocks from network... usually it takes about couple minutes.
+              Fetching blocks from peers... usually it takes about couple minutes.
             </div>
           </div>
         )}

@@ -1,7 +1,8 @@
 import env from './env/environment';
 import {
-  pushBlocks, switchBranch
+  pushBlocks, switchBranch, setPeers
 } from './common/state/blockchain/index';
+import { peersChanged } from './utils/blockchainUtils';
 
 const types = ['ready', 'push', 'switch'];
 
@@ -67,6 +68,17 @@ class BlockchainManager {
     this.worker.addEventListener('message', this.workerMessageHandler);
     // create the underlying node and join into network
     this.worker.createNode('litemessage', env.initPeerUrls);
+
+    this.timers = [
+      setInterval(async () => {
+        let curPeers = await this.worker.getPeers();
+        let { peers } = this.store.getState().blockchain;
+
+        if (peersChanged(peers, curPeers)) {
+          this.store.dispatch(setPeers(curPeers));
+        }
+      }, 10000)
+    ];
   }
 
   /**
