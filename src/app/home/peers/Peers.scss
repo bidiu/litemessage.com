@@ -1,0 +1,82 @@
+@import '_common';
+
+.Peers .ps-head {
+  margin-bottom: 16px;
+}
+
+.Peers .slick-list {
+  padding: 0 12px;
+}
+
+.Peers .slick-prev,
+.Peers .slick-next {
+  width: 52px;
+  height: 52px;
+  z-index: 150;
+  opacity: 1 !important;
+}
+
+.Peers .slick-prev:before,
+.Peers .slick-next:before {
+  font-family: "Material Icons";
+  width: 52px;
+  height: 52px;
+  display: inline-block;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 52px;
+  color: $theme-color-var1;
+  opacity: 1 !important;
+  font-size: 32px;
+}
+
+.Peers .slick-disabled:before {
+  color: #c5c5c5;
+  cursor: auto;
+}
+
+.Peers .slick-prev:before {
+  content: "keyboard_arrow_left";
+}
+
+.Peers .slick-next:before {
+  content: "keyboard_arrow_right";
+}
+
+.Peers .ps-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// following is Peer
+
+$peer-padding: 20px;
+$peer-icon-size: 52px;
+
+.Peer {
+  padding: $peer-padding;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
+
+.Peer .peer-icon {
+  width: $peer-icon-size;
+  height: $peer-icon-size;
+  border-radius: 50%;
+  line-height: $peer-icon-size;
+  position: absolute;
+  top: $peer-padding;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: $box-shadow-var1;
+}
+
+.Peer .peer-item {
+  padding: 12px 16px 0 16px;
+}
+
+.Peer .peer-uuid {
+  margin-top: $peer-icon-size;
+}

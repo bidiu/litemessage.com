@@ -10,6 +10,7 @@ $min-safe-height: 360px;
   top: -$min-safe-height;
   left: 0;
   z-index: 100;
+  box-shadow: $box-shadow-var2;
 }
 
 .Slidedown.open {
