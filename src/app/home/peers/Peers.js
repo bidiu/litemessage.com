@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 import DotSpinner from '../../common/ui/dot-spinner/DotSpinner';
 import randomColor from 'randomcolor';
-import pickColor from 'pick-a-good-color';
+import { pickColor } from '../../utils/colorUtils';
 import { peersChanged } from '../../utils/blockchainUtils';
 
 import './Peers.css';
