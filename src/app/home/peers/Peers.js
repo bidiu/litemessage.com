@@ -17,7 +17,7 @@ class Peers extends Component {
   componentDidMount() {
     window.$('.ps-carousel').on('init', () => {
       
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         let { peers } = this.props;
         
         this.setState({ showSpinner: false });
@@ -94,6 +94,9 @@ class Peers extends Component {
 
   componentWillUnmount() {
     window.$('.ps-carousel').slick('unslick');
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
   }
 
   render() {

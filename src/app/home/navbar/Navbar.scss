@@ -36,6 +36,20 @@ $nav-bar-height-collapse: 56px;
   flex-grow: 1;
 }
 
+.Navbar .logo-anchor {
+  height: 100%;;
+  line-height: $nav-bar-height;
+}
+
+.Navbar.collapse .logo-anchor {
+  line-height: $nav-bar-height-collapse;
+}
+
+.Navbar .logo-img {
+  vertical-align: middle;
+  height: 32px;
+}
+
 .Navbar .tab {
   padding: 0 16px;
   cursor: pointer;

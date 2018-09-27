@@ -7,6 +7,8 @@ import BurgerMenu from '../../common/ui/burger/BurgerMenu';
 import TABS from '../../common/constants/tabs';
 
 import { setTab, unsetTab } from '../../common/state/newui/index';
+import logoInLightBg from '../../assets/litemessage_light_bg.svg';
+import logoInDarkBg from '../../assets/litemessage_dark_bg.svg';
 import './Navbar.css';
 
 class Navbar extends Component {
@@ -88,7 +90,10 @@ class Navbar extends Component {
     return (
       <div className={`Navbar font-primary ${collapse ? 'collapse' : ''}`}>
         <div className="logo">
-          <a className="logo-anchor" href="#">litemessage</a>
+          <a className="logo-anchor" href="/">
+            <img className="logo-img" src={collapse ? logoInDarkBg : logoInLightBg} 
+              alt="litmessage logo" />
+          </a>
         </div>
         {viewportType === 'VIEWPORT_DESKTOP' ? tabs : (
           <BurgerMenu open={sidebarOpen}
