@@ -70,14 +70,7 @@ class BlockchainManager {
     this.worker.createNode('litemessage', env.initPeerUrls);
 
     this.timers = [
-      setInterval(async () => {
-        let curPeers = await this.worker.getPeers();
-        let { peers } = this.store.getState().blockchain;
-
-        if (peersChanged(peers, curPeers)) {
-          this.store.dispatch(setPeers(curPeers));
-        }
-      }, 10000)
+      setInterval(this.syncPeers.bind(this), 10000)
     ];
   }
 
@@ -103,6 +96,18 @@ class BlockchainManager {
     }
   }
 
+  /**
+   * Sync litenode's peers with the `peers` state in Redux.
+   */
+  async syncPeers() {
+    let curPeers = await this.worker.getPeers();
+    let { peers } = this.store.getState().blockchain;
+
+    if (peersChanged(peers, curPeers)) {
+      this.store.dispatch(setPeers(curPeers));
+    }
+  }
+
   workerMessageHandler({ data: { type, ...message } }) {
     if (!types.includes(type)) { return; }
     // call the type's handler
@@ -112,6 +117,11 @@ class BlockchainManager {
   async readyMessageHandler() {
     this.state = STATES.READY;
     this.syncBlockchain(); 
+    // wait for 5 seconds before sync peers
+    // because it takes some time for litenode
+    // to connect with peers after litenode
+    // (underlying IndexedDB actually) is ready
+    setTimeout(this.syncPeers.bind(this), 5000);
   }
 
   pushMessageHandler({ block, prevHead }) {

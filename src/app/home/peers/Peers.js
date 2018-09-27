@@ -9,18 +9,23 @@ import { peersChanged } from '../../utils/blockchainUtils';
 import './Peers.css';
 
 class Peers extends Component {
-  componentDidMount() {
-    window.$('.peer-slick').on('init', () => {
-      let { peers } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = { showSpinner: true };
+  }
 
-      if (peers.length) {
-        setTimeout(() => {
-          this.repopulateCarousel(peers);
-        }, 1000)
-      }
+  componentDidMount() {
+    window.$('.ps-carousel').on('init', () => {
+      
+      setTimeout(() => {
+        let { peers } = this.props;
+        
+        this.setState({ showSpinner: false });
+        this.repopulateCarousel(peers);
+      }, 1000)
     });
 
-    window.$('.peer-slick').slick({
+    window.$('.ps-carousel').slick({
       dots: true,
       infinite: false,
       slidesToShow: 4,
@@ -55,14 +60,14 @@ class Peers extends Component {
 
   repopulateCarousel(peers) {
     // clear the carousel first (for simiplicity)
-    window.$('.peer-slick').slick('slickRemove', null, null, true);
+    window.$('.ps-carousel').slick('slickRemove', null, null, true);
 
     // populate it again
     for (let peer of peers) {
       let background = randomColor();
       let color = pickColor(['#000000', '#ffffff'], { background });
 
-      window.$('.peer-slick').slick('slickAdd', 
+      window.$('.ps-carousel').slick('slickAdd', 
         `<div class="Peer">` + 
           `<div class="peer-icon font-tiny" style="background-color: ${background}; color: ${color}">` +
             `${peer.type === 'full' ? 'fullnode' : 'thinnode'}` +
@@ -87,15 +92,20 @@ class Peers extends Component {
     }
   }
 
+  componentWillUnmount() {
+    window.$('.ps-carousel').slick('unslick');
+  }
+
   render() {
     let { peers } = this.props;
+    let { showSpinner } = this.state;
 
     return (
       <div className="Peers">
         <h1 className="ps-head">Connected Peers</h1>
         <div className="ps-body">
-          <div className="peer-slick"></div>
-          {!peers.length && (
+          <div className="ps-carousel"></div>
+          {(!peers.length || showSpinner) && (
             <div className="ps-spinner-container">
               <DotSpinner />
               <div>
