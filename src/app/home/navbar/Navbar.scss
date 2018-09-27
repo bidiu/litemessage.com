@@ -39,6 +39,7 @@ $nav-bar-height-collapse: 56px;
 .Navbar .logo-anchor {
   height: 100%;;
   line-height: $nav-bar-height;
+  transition: .3s;
 }
 
 .Navbar.collapse .logo-anchor {
