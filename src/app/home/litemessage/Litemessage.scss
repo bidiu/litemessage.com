@@ -1,0 +1,25 @@
+@import '_common';
+
+$min-height: 157px;
+
+.Litemessage {
+  padding: 10px 0;
+  box-sizing: border-box;
+  min-height: $min-height;
+}
+
+.Litemessage-title {
+  margin-bottom: 4px;
+  font-size: 18px;
+  font-weight: $font-weight-bold;
+}
+
+.Litemessage-subtitle {
+  margin-bottom: 4px;
+  color: $text-color-var4;
+}
+
+.Litemessage-content {
+  line-height: 1.6;
+  color: $text-color-var4;
+}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { hideDocScrollBars, showDocScrollBars } from '../../../utils/domUtils';
+import { connect } from "react-redux";
+import { withRouter } from 'react-router';
+import { hideDocScrollBars, showDocScrollBars, getScrollBarWidth } from '../../../utils/domUtils';
 import Fade from '../fade/Fade';
 
 import './FullscreenViewer.css';
@@ -10,6 +12,8 @@ class FullscreenViewer extends Component {
     this.overlayClickHandler = this.overlayClickHandler.bind(this);
     this.overlayContentClickHandler = this.overlayContentClickHandler.bind(this);
     this.overlayCloseBtnHandler = this.overlayCloseBtnHandler.bind(this);
+
+    this.scrollbarWidth = getScrollBarWidth();
   }
 
   componentWillReceiveProps({ open: nextOpen }) {
@@ -36,8 +40,9 @@ class FullscreenViewer extends Component {
   }
 
   render() {
-    let open = this.props.open;
-    let showCloseBtn = this.props.showCloseBtn || true;
+    let { open, showCloseBtn, viewportType } = this.props;
+    let contentStyle = viewportType === 'VIEWPORT_MOBILE' ?
+      {} : { left: `calc(50% - ${this.scrollbarWidth}px / 2` };
 
     return (
       <div className="FullscreenViewer">
@@ -46,6 +51,7 @@ class FullscreenViewer extends Component {
           {/* the content */}
           <Fade in={open} classNames="FullscreenViewer-Fade" timeout={500}>
             <div className="FullscreenViewer-overlay-content"
+              style={contentStyle}
               onClick={this.overlayContentClickHandler}>
               {this.props.children}
             </div>
@@ -67,4 +73,9 @@ class FullscreenViewer extends Component {
   }
 }
 
-export default FullscreenViewer;
+export default withRouter(connect(
+  state => ({
+    viewportType: state.ui.viewportType
+  }),
+  dispatch => ({})
+)(FullscreenViewer));

@@ -1,8 +1,8 @@
 import {
-  PUSH_BLOCKS, UNSHIFT_BLOCKS, SWITCH_BRANCH
+  PUSH_BLOCKS, UNSHIFT_BLOCKS, SWITCH_BRANCH, UPDATE_BLOCK
 } from './index';
 
-const blocks = (state = {}, { type, blocks }) => {
+const blocks = (state = {}, { type, blocks, block }) => {
   switch (type) {
     case PUSH_BLOCKS:
     case UNSHIFT_BLOCKS:
@@ -14,6 +14,9 @@ const blocks = (state = {}, { type, blocks }) => {
         }
       }
       return nextState;
+
+    case UPDATE_BLOCK:
+      return { ...state, [block.hash]: block };
 
     default:
       return state;

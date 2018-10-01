@@ -1,10 +1,10 @@
 import env from './env/environment';
 import {
-  pushBlocks, switchBranch, setPeers
+  pushBlocks, switchBranch, setPeers, updateBlock
 } from './common/state/blockchain/index';
 import { peersChanged } from './utils/blockchainUtils';
 
-const types = ['ready', 'push', 'switch'];
+const types = ['ready', 'push', 'switch', 'update'];
 
 // you can reopen a litenode from `DESTROYED` state
 const STATES = Object.freeze({
@@ -108,6 +108,10 @@ class BlockchainManager {
     }
   }
 
+  fetchBlockBody(blockId) {
+    this.worker.fetchBlockBody(blockId);
+  }
+
   workerMessageHandler({ data: { type, ...message } }) {
     if (!types.includes(type)) { return; }
     // call the type's handler
@@ -142,6 +146,10 @@ class BlockchainManager {
     } else {
       this.syncBlockchain();
     }
+  }
+
+  updateMessageHandler({ block }) {
+    this.store.dispatch(updateBlock(block));
   }
 
   close() {

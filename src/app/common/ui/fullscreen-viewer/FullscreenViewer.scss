@@ -1,6 +1,6 @@
 @import '_common';
 
-$shade-opacity: .9;
+$shade-opacity: .2;
 
 .FullscreenViewer-overlay {
   position: fixed;
@@ -16,14 +16,14 @@ $shade-opacity: .9;
 .FullscreenViewer-overlay-open {
   width: 100%;
   height: 100%;
-  padding-top: 60px;
   overflow-y: auto;
 }
 
 .FullscreenViewer-overlay-content {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .FullscreenViewer-overlay-shade {
@@ -42,6 +42,7 @@ $shade-opacity: .9;
   z-index: $z-index-fullscreen-overlay + 1;
   top: 16px;
   right: 32px;
+  color: $link-color-var1 !important;
 }
 
 // animation for content starts

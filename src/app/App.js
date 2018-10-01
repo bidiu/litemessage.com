@@ -3,21 +3,29 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 import LitemessageWorker from 'workerize-loader!./litemessage.worker'; // eslint-disable-line
 import store from './bootstrap/store';
+import BlockchainContext from './blockchain-context';
 import BlockchainManager from './blockchain-manager';
 import Particles from 'particlesjs/dist/particles';
 import ViewportQuery from './common/ui/viewports/ViewportQuery';
 import BannerList from './common/ui/banners/BannerList';
 import ToastList from './common/ui/toasts/ToastList';
 import Home from './home/Home';
+import { getScrollBarWidth } from './utils/domUtils';
 
+import { setScrollbarWidth } from './common/state/newui/index';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.blockchainManager = new BlockchainManager(LitemessageWorker, store);
+  }
+
   componentDidMount() {
     // draw the background with particle effects
     Particles.init({
       selector: '#particles',
-      maxParticles: 30,
+      maxParticles: 50,
       connectParticles: true,
       speed: .2,
       color: '#cccccc',
@@ -25,7 +33,7 @@ class App extends Component {
         {
           breakpoint: 1024,
           options: {
-            maxParticles: 20
+            maxParticles: 30
           }
         },
         {
@@ -37,10 +45,16 @@ class App extends Component {
       ]
     });
 
-    this.blockchainManager = new BlockchainManager(LitemessageWorker, store);
+    // set scrollbar width
+    this.props.setScrollbarWidth(getScrollBarWidth());
+  }
+
+  componentWillUnmount() {
+    this.blockchainManager.close();
   }
 
   render() {
+    let blockchainManager = this.blockchainManager;
     let viewportType = this.props.viewportType;
 
     return (
@@ -49,8 +63,10 @@ class App extends Component {
         <BannerList />
         <ToastList />
 
-        {/* the main content of the app */}
-        <Home />
+        <BlockchainContext.Provider value={{ blockchainManager }}>
+          {/* the main content of the app */}
+          <Home />
+        </BlockchainContext.Provider>
       </div>
     );
   }
@@ -60,5 +76,9 @@ export default withRouter(connect(
   state => ({
     viewportType: state.ui.viewportType,
   }),
-  dispatch => ({})
+  dispatch => ({
+    setScrollbarWidth(width) {
+      dispatch(setScrollbarWidth(width));
+    }
+  })
 )(App));

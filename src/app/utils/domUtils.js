@@ -1,3 +1,6 @@
+import store from '../bootstrap/store';
+import { hideScrollbar, showScrollbar } from '../common/state/newui/index';
+
 const calcOffsetToDoc = (el) => {
   var rect = el.getBoundingClientRect(),
   scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
@@ -63,11 +66,14 @@ const shouldWindowVerticalScrollBarShown = () => {
 const hideDocScrollBars = ({ x = true, y = true } = {}) => {
   if (x) {
     document.documentElement.style.overflowX = 'hidden';
+    // document.documentElement.classList.add('hide-doc-scrollbar-x');
   }
   if (y) {
     document.documentElement.style.overflowY = 'hidden';
     if (shouldWindowVerticalScrollBarShown()) {
-      document.documentElement.style.paddingRight = getScrollBarWidth() + 'px'
+      document.documentElement.style.paddingRight = getScrollBarWidth() + 'px';
+      document.documentElement.classList.add('hide-doc-scrollbar-y');
+      store.dispatch(hideScrollbar());
     }
   }
 };
@@ -75,10 +81,13 @@ const hideDocScrollBars = ({ x = true, y = true } = {}) => {
 const showDocScrollBars = ({ x = true, y = true } = {}) => {
   if (x) {
     document.documentElement.style.overflowX = '';
+    // document.documentElement.classList.remove('hide-doc-scrollbar-x');
   }
   if (y) {
     document.documentElement.style.overflowY = '';
     document.documentElement.style.paddingRight = '0';
+    document.documentElement.classList.remove('hide-doc-scrollbar-y');
+    store.dispatch(showScrollbar());
   }
 };
 

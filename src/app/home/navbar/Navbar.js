@@ -63,8 +63,11 @@ class Navbar extends Component {
   }
 
   render() {
-    let { viewportType } = this.props;
+    let { viewportType, scrollbar } = this.props;
     let { collapse, sidebarOpen } = this.state;
+
+    let { width, hide } = scrollbar;
+    let style = hide ? { paddingRight: 20 + width } : {};
 
     let tabs = (
       <Fragment>
@@ -88,7 +91,7 @@ class Navbar extends Component {
     );
 
     return (
-      <div className={`Navbar font-primary ${collapse ? 'collapse' : ''}`}>
+      <div className={`Navbar font-primary ${collapse ? 'collapse' : ''}`} style={style}>
         <div className="logo">
           <a className="logo-anchor" href="/">
             <img className="logo-img" src={collapse ? logoInDarkBg : logoInLightBg} 
@@ -113,7 +116,8 @@ class Navbar extends Component {
 export default withRouter(connect(
   state => ({
     viewportType: state.ui.viewportType,
-    tab: state.newui.tab
+    tab: state.newui.tab,
+    scrollbar: state.newui.scrollbar
   }),
   dispatch => ({
     setTab(tab) {

@@ -2,13 +2,13 @@ import React from 'react';
 
 import './Block.css';
 
-const Block = ({ block }) => {
+const Block = ({ block, onClick }) => {
   let title = block.height === 0 ? `BLOCK GENESIS` : `BLOCK #${block.height}`;
   let utc = new Date(block.time).toUTCString();
 
   return (
     <div className="Block font-tiny" id={block.hash}>
-      <div>
+      <div onClick={() => onClick && onClick(block)}>
         <div className="info-row">
           <span className="info-name font-small text-truncate">BLOCK HASH</span>&nbsp;
           <span className="info-value console-print text-truncate" title={block.hash}>{block.hash}</span>
