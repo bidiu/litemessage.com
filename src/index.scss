@@ -213,6 +213,14 @@ html {
 }
 
 
+.prevent-body-scroll {
+  // height: 100%;
+  // width: 100%;
+  overflow: hidden;
+  // position: fixed;
+}
+
+
 // some responsive helpers
 .vp-mobile-show {
   position: fixed !important;
@@ -239,4 +247,63 @@ html {
   to {
     transform: rotateZ(360deg)
   }
+}
+
+
+a.shopify-link {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #8049e7;
+}
+
+a.shopify-link:focus,
+a.shopify-link:hover {
+  opacity: 0.8;
+}
+
+a.shopify-link:focus {
+  box-shadow: 0 0 2px 2px #a293da86;
+}
+
+button.btn-link {
+  border-radius: 2px;
+  padding: 0 8px;
+  // text-decoration: underline;
+  cursor: pointer;
+  // color: #8049e7;
+}
+
+button.btn-link:hover,
+button.btn-link:focus {
+  opacity: 0.8;
+}
+
+button.btn-link:focus {
+  box-shadow: 0 0 2px 2px #93b4dae0;
+}
+
+button.shopify-btn {
+  box-sizing: border-box;
+  height: 42px;
+  border-radius: 2px;
+  background-color: #7e24fa;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  color: #f4ecff;
+  padding: 0 32px;
+  font-weight: bold;
+}
+
+button.shopify-btn:focus {
+  box-shadow: 0 0 3px 3px #8472c77e;
+}
+
+button.shopify-btn:hover {
+  background-color: #6624d2;
+}
+
+button.shopify-btn:active {
+  background-color: #3e2e94;
+  color: #cfcfcf;
 }

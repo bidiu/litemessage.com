@@ -71,27 +71,23 @@ class Navbar extends Component {
 
     let tabs = (
       <Fragment>
-        <div className="tab" onClick={this.handleTabClick.bind(this, TABS.PEERS)}>
-          <i className="fab fa-connectdevelop"></i>
-          <span>Peers</span>
-        </div>
-        <div className="tab" onClick={this.handleTabClick.bind(this, TABS.GITHUB)}>
+        <button className="tab btn-link" onClick={this.handleTabClick.bind(this, TABS.GITHUB)}>
           <i className="fab fa-github"></i>
           <span className="github">Github</span>
-        </div>
-        <div className="tab" onClick={this.handleTabClick.bind(this, TABS.GEEK)}>
-          <i className="far fa-laugh"></i>
-          <span>Geek</span>
-        </div>
-        <div className="tab">
+        </button>
+        <button className="tab btn-link" onClick={this.handleTabClick.bind(this, TABS.GEEK)}>
+          <i className="fab fa-connectdevelop"></i>
+          <span>Geeks</span>
+        </button>
+        <button className="tab btn-link">
           <i className="fas fa-question-circle"></i>
           <span>About</span>
-        </div>
+        </button>
       </Fragment>
     );
 
     return (
-      <div className={`Navbar font-primary ${collapse ? 'collapse' : ''}`} style={style}>
+      <div className={`Navbar font-primary-light ${collapse ? 'collapse' : ''}`} style={style}>
         <div className="logo">
           <a className="logo-anchor" href="/">
             <img className="logo-img" src={collapse ? logoInDarkBg : logoInLightBg} 

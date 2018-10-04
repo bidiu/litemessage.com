@@ -24,7 +24,8 @@ $nav-bar-height-collapse: 56px;
   color: $text-color-var1;
 }
 
-.Navbar > div {
+.Navbar > div,
+.Navbar > button, {
   flex-shrink: 0;
   height: 100%;
   box-sizing: border-box;
@@ -57,6 +58,8 @@ $nav-bar-height-collapse: 56px;
   position: relative;
   opacity: .8;
   transition: .3s;
+  display: block !important;
+  text-align: left;
 }
 
 .Navbar .tab span {
@@ -64,11 +67,13 @@ $nav-bar-height-collapse: 56px;
   padding-left: 4px;
 }
 
-.Navbar .tab:hover {
+.Navbar .tab:hover,
+.Navbar .tab:focus {
   opacity: 1;
 }
 
-.Navbar.collapse .tab:hover {
+.Navbar.collapse .tab:hover,
+.Navbar.collapse .tab:focus {
   background-color: $bg-color-dark-var1;
 }
 
@@ -88,7 +93,8 @@ $nav-bar-height-collapse: 56px;
   background: $text-color-var1;
 }
 
-.Navbar .tab:hover::after {
+.Navbar .tab:hover::after,
+.Navbar .tab:focus::after {
   opacity: 1;
 }
 
@@ -99,6 +105,7 @@ $nav-bar-height-collapse: 56px;
 .Navbar .sidebar .tab {
   color: $text-color-var1 !important;
   padding: 12px !important;
+  width: 100%;
 }
 
 .Navbar .sidebar .tab:hover {

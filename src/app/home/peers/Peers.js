@@ -5,6 +5,7 @@ import DotSpinner from '../../common/ui/dot-spinner/DotSpinner';
 import randomColor from 'randomcolor';
 import { pickColor } from '../../utils/colorUtils';
 import { peersChanged } from '../../utils/blockchainUtils';
+import uuidv1 from 'uuid/v1';
 
 import './Peers.css';
 
@@ -12,10 +13,13 @@ class Peers extends Component {
   constructor(props) {
     super(props);
     this.state = { showSpinner: true };
+    this.carouselClass = '.' + uuidv1();
   }
 
   componentDidMount() {
-    window.$('.ps-carousel').on('init', () => {
+    let { carouselConfig } = this.props;
+
+    window.$(this.carouselClass).on('init', () => {
       
       this.timer = setTimeout(() => {
         let { peers } = this.props;
@@ -25,7 +29,7 @@ class Peers extends Component {
       }, 1000)
     });
 
-    window.$('.ps-carousel').slick({
+    window.$(this.carouselClass).slick(carouselConfig || {
       dots: true,
       infinite: false,
       slidesToShow: 4,
@@ -60,14 +64,14 @@ class Peers extends Component {
 
   repopulateCarousel(peers) {
     // clear the carousel first (for simiplicity)
-    window.$('.ps-carousel').slick('slickRemove', null, null, true);
+    window.$(this.carouselClass).slick('slickRemove', null, null, true);
 
     // populate it again
     for (let peer of peers) {
       let background = randomColor();
       let color = pickColor(['#000000', '#ffffff'], { background });
 
-      window.$('.ps-carousel').slick('slickAdd', 
+      window.$(this.carouselClass).slick('slickAdd', 
         `<div class="Peer">` + 
           `<div class="peer-icon font-tiny" style="background-color: ${background}; color: ${color}">` +
             `${peer.type === 'full' ? 'fullnode' : 'thinnode'}` +
@@ -93,21 +97,21 @@ class Peers extends Component {
   }
 
   componentWillUnmount() {
-    window.$('.ps-carousel').slick('unslick');
+    window.$(this.carouselClass).slick('unslick');
     if (this.timer) {
       clearTimeout(this.timer);
     }
   }
 
   render() {
-    let { peers } = this.props;
+    let { peers, className } = this.props;
     let { showSpinner } = this.state;
 
     return (
-      <div className="Peers">
-        <h1 className="ps-head">Connected Peers</h1>
+      <div className={`Peers ${className || ''}`}>
+        <div className="ps-head">Connected Peers</div>
         <div className="ps-body">
-          <div className="ps-carousel"></div>
+          <div className={this.carouselClass.slice(1)}></div>
           {(!peers.length || showSpinner) && (
             <div className="ps-spinner-container">
               <DotSpinner />

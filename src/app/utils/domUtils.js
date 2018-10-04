@@ -69,7 +69,9 @@ const hideDocScrollBars = ({ x = true, y = true } = {}) => {
     // document.documentElement.classList.add('hide-doc-scrollbar-x');
   }
   if (y) {
-    document.documentElement.style.overflowY = 'hidden';
+    document.documentElement.classList.add('prevent-body-scroll');
+    document.body.classList.add('prevent-body-scroll');
+
     if (shouldWindowVerticalScrollBarShown()) {
       document.documentElement.style.paddingRight = getScrollBarWidth() + 'px';
       document.documentElement.classList.add('hide-doc-scrollbar-y');
@@ -84,7 +86,9 @@ const showDocScrollBars = ({ x = true, y = true } = {}) => {
     // document.documentElement.classList.remove('hide-doc-scrollbar-x');
   }
   if (y) {
-    document.documentElement.style.overflowY = '';
+    document.documentElement.classList.remove('prevent-body-scroll');
+    document.body.classList.remove('prevent-body-scroll');
+
     document.documentElement.style.paddingRight = '0';
     document.documentElement.classList.remove('hide-doc-scrollbar-y');
     store.dispatch(showScrollbar());

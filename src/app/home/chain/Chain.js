@@ -1,38 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router';
-import FullscreenViewer from '../../common/ui/fullscreen-viewer/FullscreenViewer';
 import Block from '../block/Block';
-import BlockDetails from '../block-details/BlockDetails';
+import DotSpinnerVar1 from '../../common/ui/dot-spinner-var1/DotSpinnerVar1';
 
 import './Chain.css';
 
 class Chain extends Component {
-  constructor(props) {
-    super(props);
-
-    // `block` here is the block that is displayed in popup
-    this.state = { block: null };
-  }
-
-  handleBlockClick = (block) => {
-    this.setState({ block });
-  }
-
-  handleFullscreenViewerClose = () => {
-    this.setState({ block: null });
-  }
-
   render() {
-    let { blocklist, viewportType } = this.props;
-    let { block } = this.state;
+    let { blocklist } = this.props;
 
     return (
       <div className="Chain">
-        <FullscreenViewer open={!!block} showCloseBtn={viewportType === 'VIEWPORT_MOBILE'}
-          onOpenChange={this.handleFullscreenViewerClose}>
-          <BlockDetails blockId={block ? block.hash : undefined} />
-        </FullscreenViewer>
+        {!blocklist.length && (
+          <DotSpinnerVar1 text="Fetching blocks from peers... usually it takes about couple minutes."
+            className="Chain-spinner" />
+        )}
         {[...blocklist].reverse().map(block => (
           <Block key={block.hash} block={block} onClick={this.handleBlockClick} />
         ))}

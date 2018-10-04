@@ -25,15 +25,15 @@ class App extends Component {
     // draw the background with particle effects
     Particles.init({
       selector: '#particles',
-      maxParticles: 50,
+      maxParticles: 30,
       connectParticles: true,
       speed: .2,
-      color: '#cccccc',
+      color: '#ffffff',
       responsive: [
         {
           breakpoint: 1024,
           options: {
-            maxParticles: 30
+            maxParticles: 20
           }
         },
         {

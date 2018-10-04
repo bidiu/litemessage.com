@@ -2,6 +2,8 @@
 
 .Peers .ps-head {
   margin-bottom: 16px;
+  font-weight: 500;
+  font-size: 2.4rem;
 }
 
 .Peers .slick-list {
@@ -12,7 +14,6 @@
 .Peers .slick-next {
   width: 52px;
   height: 52px;
-  z-index: 150;
   opacity: 1 !important;
 }
 

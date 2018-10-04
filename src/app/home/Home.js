@@ -3,12 +3,11 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 import Navbar from './navbar/Navbar';
 import Slidedown from './slidedown/Slidedown';
-import Peers from './peers/Peers';
 import Github from './github/Github';
 import Geek from './geek/Geek';
+import Peers from './peers/Peers';
 import Chain from './chain/Chain';
 import Copyright from './copyright/Copyright';
-import DotSpinner from '../common/ui/dot-spinner/DotSpinner';
 import TABS from '../common/constants/tabs';
 
 import { unsetTab } from '../common/state/newui/index';
@@ -19,6 +18,14 @@ const tabMap = new Map([
   [TABS.GITHUB, Github],
   [TABS.GEEK, Geek],
 ]);
+
+const carouselConfig = {
+  dots: true,
+  infinite: false,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  accessibility: false,
+};
 
 class Home extends Component {
   constructor(props) {
@@ -42,15 +49,31 @@ class Home extends Component {
           onCloseIconClick={this.handleCloseIconClick}>
           {TabComponent && <TabComponent />}
         </Slidedown>
-        {!blocklist.length && (
-          <div className="spinner-container">
-            <DotSpinner />
-            <div>
-              Fetching blocks from peers... usually it takes about couple minutes.
-            </div>
+        <div style={{ height: 100 }}></div>
+
+        {viewportType !== 'VIEWPORT_DESKTOP' && (
+          <div className="Home-peers-mobile">
+            <Peers />
           </div>
         )}
-        <Chain blocklist={blocklist} />
+
+        <div className="Home-content">
+          {/* sidebar */}
+          {viewportType === 'VIEWPORT_DESKTOP' && (
+            <div className="Home-sidebar">
+              <div className="Home-peers">
+                <Peers carouselConfig={carouselConfig} className="peers-in-sidebar" />
+              </div>
+            </div>
+          )}
+
+          {/* main */}
+          <div className="Home-main">
+            <Chain blocklist={blocklist} />
+          </div>
+        </div>
+
+        {/* copyright */}
         {viewportType === 'VIEWPORT_DESKTOP' && (
           <div className="copyright-container font-tiny">
             <Copyright />
