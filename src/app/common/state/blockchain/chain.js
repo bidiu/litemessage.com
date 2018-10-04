@@ -8,6 +8,11 @@ const chain = (state = [], { type, blocks }) => {
       return [...state, ...(blocks.map(block => block.hash))];
 
     case UNSHIFT_BLOCKS:
+      for (let { hash } of blocks) {
+        if (state.includes(hash)) {
+          return state;
+        }
+      }
       return [...(blocks.map(block => block.hash)), ...state];
 
     case SWITCH_BRANCH:

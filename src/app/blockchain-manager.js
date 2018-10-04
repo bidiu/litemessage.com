@@ -112,6 +112,10 @@ class BlockchainManager {
     this.worker.fetchBlockBody(blockId);
   }
 
+  async getSubBlockchain(until, length) {
+    return this.worker.getSubBlockchain(until, length);
+  }
+
   workerMessageHandler({ data: { type, ...message } }) {
     if (!types.includes(type)) { return; }
     // call the type's handler
