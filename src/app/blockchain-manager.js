@@ -30,7 +30,7 @@ const MAX_SYNC_LEN = 200;
 /**
  * For each page, retrieve 20 blocks
  */
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 10;
 
 /**
  * This class is a bridge between blockchain data
@@ -51,6 +51,10 @@ class BlockchainManager {
     this.timers = [];
 
     this.createNewWorker();
+  }
+
+  static get PAGE_SIZE() {
+    return PAGE_SIZE;
   }
 
   /**

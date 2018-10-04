@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 import BlockchainContext from '../../blockchain-context';
+import BlockchainManager from '../../blockchain-manager';
 import Block from '../block/Block';
 import DotSpinnerVar1 from '../../common/ui/dot-spinner-var1/DotSpinnerVar1';
 
 import { unshiftBlocks } from '../../common/state/blockchain/index';
 import './Chain.css';
+
+const PAGE_SIZE = BlockchainManager.PAGE_SIZE;
 
 class Chain extends Component {
   componentDidMount() {
@@ -14,13 +17,13 @@ class Chain extends Component {
       let vpHeight = window.innerHeight;
       let bottomDistance = Math.round(document.body.scrollHeight 
         - window.scrollY - vpHeight);
-      if (bottomDistance > vpHeight) { return; }
+      if (bottomDistance > 2 * vpHeight) { return; }
 
       let { blockchainManager, blocklist, unshiftBlocks } = this.props;
       if (!blocklist.length || !blocklist[0].height) { return; }
 
       let subChain = await blockchainManager
-        .getSubBlockchain(blocklist[0].hash, 20);
+        .getSubBlockchain(blocklist[0].hash, PAGE_SIZE);
       unshiftBlocks(subChain);
 
     }, 1000);
