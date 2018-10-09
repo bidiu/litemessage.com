@@ -16,7 +16,9 @@ header,
 main,
 th,
 td,
-fieldset {
+fieldset,
+textarea,
+button {
   margin: 0;
   padding: 0;
 }
@@ -48,11 +50,8 @@ select:-webkit-autofill:focus {
 button {
   border: none;
   outline: none;
-  margin: 0;
-  padding: 0;
   width: auto;
   overflow: visible;
-
   background: transparent;
 
   /* inherit font & color from ancestor */
@@ -74,8 +73,13 @@ button::-moz-focus-inner {
   border: 0;
 }
 
+textarea {
+  outline: none;
+  border: none;
+  resize: none;
+}
+
 a {
   text-decoration: none;
   color: inherit;
-  // outline: none;
 }

@@ -1,0 +1,11 @@
+@import "_common";
+
+.LitemsgForm .pm-title {
+  color: $text-color-primary;
+  margin-bottom: 8px;
+} 
+
+.LitemsgForm .pm-submit-container {
+  display: flex;
+  justify-content: flex-end;
+}

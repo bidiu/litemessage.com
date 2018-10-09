@@ -6,6 +6,7 @@ import Slidedown from './slidedown/Slidedown';
 import Github from './github/Github';
 import Geek from './geek/Geek';
 import Peers from './peers/Peers';
+import PendingMsgs from './pending-msgs/PendingMsgs';
 import Chain from './chain/Chain';
 import Copyright from './copyright/Copyright';
 import TABS from '../common/constants/tabs';
@@ -69,6 +70,7 @@ class Home extends Component {
 
           {/* main */}
           <div className="Home-main">
+            <PendingMsgs />
             <Chain blocklist={blocklist} />
           </div>
         </div>

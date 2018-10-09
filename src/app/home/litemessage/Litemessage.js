@@ -10,12 +10,19 @@ class Litemessage extends Component {
 
     return (
       <div className="Litemessage">
-        <div className="Litemessage-title text-truncate">
-          <span>{`(${index + 1}/${total}) `}</span>
-          <span>{litemsg.hash}</span>
+        <div className="Litemessage-title">
+          <span className="Litemessage-title-text font-big text-color-primary">
+            {!!(index + 1) && !!total ?
+              `(${index + 1}/${total})` :
+              'litemessage'
+            }
+          </span>
+          <span className="Litemessage-title-hash font-tiny-light text-truncate console-print">
+            {litemsg.hash}
+          </span>
         </div>
 
-        <div className="Litemessage-subtitle font-tiny">
+        <div className="Litemessage-subtitle font-tiny-light">
           {utc}
         </div>
 

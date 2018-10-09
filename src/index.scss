@@ -249,6 +249,21 @@ html {
   }
 }
 
+button:focus {
+  box-shadow: $focus-outline;
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 
 a.shopify-link {
   text-decoration: underline;
@@ -268,18 +283,14 @@ a.shopify-link:focus {
 button.btn-link {
   border-radius: 2px;
   padding: 0 8px;
-  // text-decoration: underline;
   cursor: pointer;
+  // text-decoration: underline;
   // color: #8049e7;
 }
 
 button.btn-link:hover,
 button.btn-link:focus {
   opacity: 0.8;
-}
-
-button.btn-link:focus {
-  box-shadow: 0 0 2px 2px #93b4dae0;
 }
 
 button.shopify-btn {
@@ -293,10 +304,6 @@ button.shopify-btn {
   color: #f4ecff;
   padding: 0 32px;
   font-weight: bold;
-}
-
-button.shopify-btn:focus {
-  box-shadow: 0 0 3px 3px #8472c77e;
 }
 
 button.shopify-btn:hover {

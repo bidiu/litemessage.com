@@ -6,6 +6,7 @@
  */
 
 import { ThinNode } from 'litemessage/dist/litemessage.umd';
+import { pickItems } from './utils/commonUtils';
 
 export function createNode(scope, initPeerUrls) {
   if (self.node) {
@@ -25,6 +26,9 @@ export function createNode(scope, initPeerUrls) {
 
   self.blockchain.on('update', (block, head) => 
     self.postMessage({ type: 'update', block, head }));
+
+  self.node.on('locators', locators => 
+    self.postMessage({ type: 'locators', locators }));
 };
 
 export function getBlocks() {
@@ -46,4 +50,27 @@ export function getPeers(nodeTypes = '*') {
 
 export function fetchBlockBody(blockId) {
   self.node.fetchBlockBody(blockId);
+}
+
+/**
+ * Broadcast any liteprotocol msg.
+ * 
+ * Resolve `false` if the node cannot broadcast the msg, for instance, 
+ * because there's no peer currently. Otherwise, resolve `true` indicating
+ * operation is a success.
+ * 
+ * TODO support exclude option.
+ */
+export function broadcastMsg(msg, { nodeTypes = '*', limit = Number.MAX_SAFE_INTEGER } = {}) {
+  let peers = pickItems(self.node.peers(nodeTypes), limit);
+
+  if (peers.length) {
+    peers.forEach(peer => peer.sendJson(msg));
+    return true;
+  }
+  return false;
+}
+
+export function locateLitemsgs(litemsgs) {
+  self.node.locateLitemsgs(litemsgs);
 }

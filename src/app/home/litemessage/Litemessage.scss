@@ -9,9 +9,14 @@ $min-height: 157px;
 }
 
 .Litemessage-title {
-  margin-bottom: 4px;
-  font-size: 18px;
-  font-weight: $font-weight-bold;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.Litemessage-title-text {
+  display: inline-block;
+  margin-right: 8px;
 }
 
 .Litemessage-subtitle {

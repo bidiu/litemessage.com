@@ -29,6 +29,7 @@ class App extends Component {
       connectParticles: true,
       speed: .2,
       color: '#ffffff',
+      sizeVariations: 6,
       responsive: [
         {
           breakpoint: 1024,

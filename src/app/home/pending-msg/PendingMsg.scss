@@ -1,0 +1,47 @@
+@import "_common";
+
+$litemsg-padding: 28px;
+$vp-mobile-litemsg-padding: 20px;
+
+.PendingMsg {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  max-width: 540px;
+  color: #777777;
+  box-shadow: $box-shadow-var1;
+  padding: $litemsg-padding;
+  background-color: #ffffff;
+  border-radius: 16px;
+  position: relative;
+}
+
+.PendingMsg:last-child {
+  margin-bottom: 0;
+}
+
+.VIEWPORT_MOBILE .PendingMsg {
+  margin-bottom: 20px;
+  padding: $vp-mobile-litemsg-padding;
+}
+
+.PendingMsg-overlay {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  opacity: .8;
+}
+
+.PendingMsg.msg-success .PendingMsg-overlay,
+.PendingMsg.msg-waiting .PendingMsg-overlay,
+.PendingMsg.msg-timeout .PendingMsg-overlay {
+  display: flex;
+}

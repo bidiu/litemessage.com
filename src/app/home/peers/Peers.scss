@@ -14,6 +14,7 @@
 .Peers .slick-next {
   width: 52px;
   height: 52px;
+  border-radius: 50%;
   opacity: 1 !important;
 }
 
@@ -29,6 +30,10 @@
   color: $theme-color-var1;
   opacity: 1 !important;
   font-size: 32px;
+}
+
+.Peers .slick-dots > li > button {
+  border-radius: 50%;
 }
 
 .Peers .slick-disabled:before {

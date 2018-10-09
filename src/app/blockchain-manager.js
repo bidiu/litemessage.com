@@ -1,10 +1,16 @@
 import env from './env/environment';
+import { data } from 'litemessage/dist/litemessage.umd';
+import { peersChanged } from './utils/blockchainUtils';
+import { getCurTimestamp } from './utils/timeUtils';
+
 import {
   pushBlocks, switchBranch, setPeers, updateBlock
 } from './common/state/blockchain/index';
-import { peersChanged } from './utils/blockchainUtils';
+import {
+  sendMsg, resetMsg, timeoutMsg, setBlockId
+} from './common/state/litemsgs/index';
 
-const types = ['ready', 'push', 'switch', 'update'];
+const types = ['ready', 'push', 'switch', 'update', 'locators'];
 
 // you can reopen a litenode from `DESTROYED` state
 const STATES = Object.freeze({
@@ -33,6 +39,12 @@ const MAX_SYNC_LEN = 200;
 const PAGE_SIZE = 10;
 
 /**
+ * litemsgs which takes 30 seconds before get forged
+ * into the blockchain are treated as being timeout.
+ */
+const MSG_TIMEOUT = 60000;
+
+/**
  * This class is a bridge between blockchain data
  * stored in IndexedDB and the blockchain state
  * stored in Redux store.
@@ -45,7 +57,7 @@ const PAGE_SIZE = 10;
 class BlockchainManager {
   constructor(LitemessageWorker, store) {
     this.workerMessageHandler = this.workerMessageHandler.bind(this);
-    
+
     this.LitemessageWorker = LitemessageWorker;
     this.store = store;
     this.timers = [];
@@ -55,6 +67,10 @@ class BlockchainManager {
 
   static get PAGE_SIZE() {
     return PAGE_SIZE;
+  }
+
+  static get MSG_TIMEOUT() {
+    return MSG_TIMEOUT;
   }
 
   /**
@@ -74,7 +90,10 @@ class BlockchainManager {
     this.worker.createNode('litemessage', env.initPeerUrls);
 
     this.timers = [
-      setInterval(this.syncPeers.bind(this), 10000)
+      setInterval(this.syncPeers.bind(this), 10000),
+      setInterval(this.broadcastPendingMsgs, 3000),
+      setInterval(this.checkTimeoutMsgs, 3000),
+      setInterval(this.checkSuccessMsgs, 20000),
     ];
   }
 
@@ -112,8 +131,74 @@ class BlockchainManager {
     }
   }
 
+  /**
+   * Broadcast any liteprotocol msg.
+   * 
+   * Resolve `false` if the node cannot broadcast the msg, for instance, 
+   * because there's no peer currently. Otherwise, resolve `true` indicating
+   * operation is a success.
+   */
+  async broadcastMsg(msg, { nodeTypes, limit } = {}) {
+    return this.worker.broadcastMsg(msg, { nodeTypes, limit });
+  }
+
+  broadcastPendingMsgs = async () => {
+    let pendingMsgs = this.store.getState().litemsgs.pendingQueue
+      .filter(e => e.litemsg && !e.sentAt);
+    let litemsgs = pendingMsgs.map(e => e.litemsg);
+
+    if (!litemsgs.length) { return; }
+
+    let sentAt = getCurTimestamp();
+    // being optimistic here
+    pendingMsgs.forEach(({ pendingId }) => 
+      this.store.dispatch(sendMsg(pendingId, sentAt)));
+
+    let success = await this.broadcastMsg(
+      data({ litemsgs }), 
+      { nodeTypes: 'full', limit: 3 }
+    );
+    // if somthing's wrong (cause we were optimistic above)
+    if (!success) {
+      pendingMsgs.forEach(({ pendingId }) => 
+        this.store.dispatch(resetMsg(pendingId)));
+    }
+  };
+
+  /**
+   * Note this is a interval task. Do not
+   * call this manually.
+   */
+  checkTimeoutMsgs = () => {
+    let pendingMsgs = this.store.getState().litemsgs.pendingQueue
+      .filter(e => !e.blockId && e.sentAt && !e.timeout);
+    let now = getCurTimestamp();
+    
+    pendingMsgs.forEach(({ pendingId, sentAt }) => {
+      if (now - sentAt > MSG_TIMEOUT) {
+        this.store.dispatch(timeoutMsg(pendingId))
+      }
+    });
+  };
+
+  /**
+   * Note this is a interval task. Do not
+   * call this manually.
+   */
+  checkSuccessMsgs = () => {
+    let pendingMsgs = this.store.getState().litemsgs.pendingQueue
+      .filter(e => e.litemsg && e.sentAt && !e.blockId);
+    let litemsgs = pendingMsgs.map(e => e.litemsg.hash);
+
+    this.locateLitemsgs(litemsgs);
+  };
+
   fetchBlockBody(blockId) {
     this.worker.fetchBlockBody(blockId);
+  }
+
+  locateLitemsgs(litemsgs) {
+    this.worker.locateLitemsgs(litemsgs);
   }
 
   async getSubBlockchain(until, length) {
@@ -158,6 +243,18 @@ class BlockchainManager {
 
   updateMessageHandler({ block }) {
     this.store.dispatch(updateBlock(block));
+  }
+
+  locatorsMessageHandler({ locators }) {
+    let pendingMsgs = this.store.getState().litemsgs.pendingQueue
+      .filter(e => e.litemsg);
+    let litemsgIds = pendingMsgs.map(e => e.litemsg.hash);
+
+    for (let [litemsgId, blockId] of locators) {
+      if (litemsgIds.includes(litemsgId) && blockId) {
+        this.store.dispatch(setBlockId(litemsgId, blockId));
+      }
+    }
   }
 
   close() {
