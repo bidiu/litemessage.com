@@ -13,6 +13,7 @@ $vp-mobile-litemsg-padding: 20px;
   background-color: #ffffff;
   border-radius: 16px;
   position: relative;
+  transform-origin: center top;
 }
 
 .PendingMsg:last-child {
@@ -24,7 +25,7 @@ $vp-mobile-litemsg-padding: 20px;
   padding: $vp-mobile-litemsg-padding;
 }
 
-.PendingMsg-overlay {
+.PendingMsg-overlay-bg {
   display: none;
   position: absolute;
   width: 100%;
@@ -32,18 +33,36 @@ $vp-mobile-litemsg-padding: 20px;
   top: 0;
   left: 0;
   border-radius: 16px;
-  padding: 20px;
+  // padding: 20px;
   box-sizing: border-box;
   background-color: #ffffff;
+  // align-items: center;
+  // justify-content: center;
+  opacity: .8;
+  // text-align: center;
+}
+
+.PendingMsg-overlay-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  display: none;
+  padding: 20px;
   align-items: center;
   justify-content: center;
-  opacity: .8;
   text-align: center;
 }
 
-.PendingMsg.msg-success .PendingMsg-overlay,
-.PendingMsg.msg-waiting .PendingMsg-overlay,
-.PendingMsg.msg-timeout .PendingMsg-overlay {
+.PendingMsg.msg-success .PendingMsg-overlay-bg,
+.PendingMsg.msg-waiting .PendingMsg-overlay-bg,
+.PendingMsg.msg-timeout .PendingMsg-overlay-bg,
+.PendingMsg.msg-success .PendingMsg-overlay-content,
+.PendingMsg.msg-waiting .PendingMsg-overlay-content,
+.PendingMsg.msg-timeout .PendingMsg-overlay-content {
   display: flex;
 }
 

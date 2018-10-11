@@ -39,7 +39,8 @@ class PendingMsg extends Component {
     return (
       <div className={`PendingMsg ${msgState || ''}`}>
         {body}
-        <div className="PendingMsg-overlay text-color-primary">
+        <div className="PendingMsg-overlay-bg" />
+        <div className="PendingMsg-overlay-content text-color-primary">
           {/* waiting overlay */}
           {msgState === 'msg-waiting' && (
             <DotSpinnerVar1 
@@ -59,7 +60,7 @@ class PendingMsg extends Component {
           {/* success overlay */}
           {msgState === 'msg-success' && (
             <div className="PendingMsg--overlay-success">
-              <i class="fas fa-check-circle"></i>
+              <i className="fas fa-check-circle"></i>
               <span>This message is on the blockchain now (more blocks after, more secure)! To check the block, see <strong>History Messages</strong> section.</span>
             </div>
           )}

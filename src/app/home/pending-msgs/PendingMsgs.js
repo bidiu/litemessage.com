@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router';
+import { TransitionGroup } from 'react-transition-group';
+import ExpandFade from '../../common/ui/expand-fade/ExpandFade';
 import PendingMsg from '../pending-msg/PendingMsg';
 
 import './PendingMsgs.css';
@@ -11,9 +13,13 @@ class PendingMsgs extends Component {
 
     return (
       <div className="PendingMsgs">
-        {pendingMsgs.map(pendingMsg => (
-          <PendingMsg key={pendingMsg.pendingId} {...pendingMsg} />
-        ))}
+        <TransitionGroup component={null}>
+          {pendingMsgs.map(pendingMsg => (
+            <ExpandFade key={pendingMsg.pendingId}>
+              <PendingMsg {...pendingMsg} />
+            </ExpandFade>
+          ))}
+        </TransitionGroup>
       </div>
     );
   }

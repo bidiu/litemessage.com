@@ -4,6 +4,8 @@ import { withRouter } from 'react-router';
 import BlockchainContext from '../../blockchain-context';
 import BlockchainManager from '../../blockchain-manager';
 import Block from '../block/Block';
+import { TransitionGroup } from 'react-transition-group';
+import FakeExpandFake from '../../common/ui/fake-expand-fade/FakeExpandFade';
 import DotSpinnerVar1 from '../../common/ui/dot-spinner-var1/DotSpinnerVar1';
 
 import { unshiftBlocks } from '../../common/state/blockchain/index';
@@ -42,9 +44,13 @@ class Chain extends Component {
           <DotSpinnerVar1 text="Fetching blocks from peers... usually it takes about couple minutes."
             className="Chain-spinner" />
         )}
-        {[...blocklist].reverse().map(block => (
-          <Block key={block.hash} block={block} onClick={this.handleBlockClick} />
-        ))}
+        <TransitionGroup component={null}>
+          {[...blocklist].reverse().map(block => (
+            <FakeExpandFake key={block.hash}>
+              <Block block={block} onClick={this.handleBlockClick} />
+            </FakeExpandFake>
+          ))}
+        </TransitionGroup>
         {(!!blocklist.length && !!blocklist[0].height) && (
           <DotSpinnerVar1 text="Loading blocks..."
             className="Chain-spinner" />
