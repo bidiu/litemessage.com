@@ -2,6 +2,10 @@ body {
   line-height: 1.4;
 }
 
+textarea {
+  line-height: 1.4;
+}
+
 body::before {
   content: "";
   background: linear-gradient(80deg, #1de4a8, #a1f7d6);
