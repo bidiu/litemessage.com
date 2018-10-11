@@ -66,7 +66,24 @@ $vp-mobile-litemsg-padding: 20px;
   display: flex;
 }
 
-.PendingMsg--overlay-success {
+.PendingMsg-overlay-timeout {
+  display: flex;
+  align-items: center;
+  text-align: left;
+
+  i {
+    font-size: 3.2rem;
+    flex-shrink: 0;
+    padding-right: 16px;
+    color: $bg-color-critical;
+  }
+
+  span {
+    flex-grow: 1;
+  }
+}
+
+.PendingMsg-overlay-success {
   display: flex;
   align-items: center;
   text-align: left;

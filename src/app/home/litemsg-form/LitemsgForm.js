@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 import Textarea from '../../common/ui/textarea/Textarea';
 import ButtonVar2 from '../../common/ui/buttons/button-var2/ButtonVar2';
+import NotificationEntry from '../../common/state/notifications/notificationEntry';
 import { createLitemsg } from '../../utils/blockchainUtils';
 import uuidv1 from 'uuid/v1';
 
 import { setMsg } from '../../common/state/litemsgs/index';
+import { addNotification } from '../../common/state/notifications/reducer';
 import './LitemsgForm.css'
 
 class LitemsgForm extends Component {
@@ -24,7 +26,13 @@ class LitemsgForm extends Component {
     e.preventDefault();
     let content = this.state.content.trim();
     this.setState({ content });
-    if (!content) { return; }
+    if (!content) {
+      this.props.addNotification(new NotificationEntry({
+        message: 'Please enter something before clicking submit.',
+        timeout: 3000
+      }));
+      return;
+    }
 
     this.props.setMsg(createLitemsg(content), uuidv1());
   };
@@ -62,6 +70,9 @@ export default withRouter(connect(
   dispatch => ({
     setMsg(litemsg, nextPendingId) {
       dispatch(setMsg(litemsg, nextPendingId));
+    },
+    addNotification(entry) {
+      dispatch(addNotification(entry));
     }
   })
 )(LitemsgForm));

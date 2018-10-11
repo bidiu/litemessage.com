@@ -50,16 +50,19 @@ class PendingMsg extends Component {
 
           {/* timeout overlay */}
           {msgState === 'msg-timeout' && (
-            <div>
-              It timeouts. Maybe it got lost in the network, 
-              or the block is forked off the main branch.&nbsp;
-              <ButtonLink onClick={this.handleResendBtnClick}>Try resend.</ButtonLink>
+            <div className="PendingMsg-overlay-timeout">
+              <i className="fas fa-times-circle"></i>
+              <span>
+                It timeouts. Maybe it got lost in the network, 
+                or the block is forked off the main branch.&nbsp;
+                <ButtonLink onClick={this.handleResendBtnClick}>Try resend.</ButtonLink>
+              </span>
             </div>
           )}
 
           {/* success overlay */}
           {msgState === 'msg-success' && (
-            <div className="PendingMsg--overlay-success">
+            <div className="PendingMsg-overlay-success">
               <i className="fas fa-check-circle"></i>
               <span>This message is on the blockchain now (more blocks after, more secure)! To check the block, see <strong>History Messages</strong> section.</span>
             </div>
