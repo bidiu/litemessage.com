@@ -58,7 +58,10 @@ class PendingMsg extends Component {
 
           {/* success overlay */}
           {msgState === 'msg-success' && (
-            'success...'
+            <div className="PendingMsg--overlay-success">
+              <i class="fas fa-check-circle"></i>
+              <span>This message is on the blockchain now (more blocks after, more secure)! To check the block, see <strong>History Messages</strong> section.</span>
+            </div>
           )}
         </div>
       </div>

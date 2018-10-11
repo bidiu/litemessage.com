@@ -46,3 +46,20 @@ $vp-mobile-litemsg-padding: 20px;
 .PendingMsg.msg-timeout .PendingMsg-overlay {
   display: flex;
 }
+
+.PendingMsg--overlay-success {
+  display: flex;
+  align-items: center;
+  text-align: left;
+
+  i {
+    font-size: 3.2rem;
+    flex-shrink: 0;
+    padding-right: 16px;
+    color: $bg-color-success;
+  }
+
+  span {
+    flex-grow: 1;
+  }
+}

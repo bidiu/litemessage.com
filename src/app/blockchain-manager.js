@@ -252,7 +252,7 @@ class BlockchainManager {
 
     for (let [litemsgId, blockId] of locators) {
       if (litemsgIds.includes(litemsgId) && blockId) {
-        // this.store.dispatch(setBlockId(litemsgId, blockId));
+        this.store.dispatch(setBlockId(litemsgId, blockId));
       }
     }
   }
