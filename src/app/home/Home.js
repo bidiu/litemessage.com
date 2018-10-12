@@ -6,6 +6,7 @@ import Slidedown from './slidedown/Slidedown';
 import Github from './github/Github';
 import Geek from './geek/Geek';
 import Peers from './peers/Peers';
+import HistoryMsgs from './history-msgs/HistoryMsgs';
 import PendingMsgs from './pending-msgs/PendingMsgs';
 import Chain from './chain/Chain';
 import Copyright from './copyright/Copyright';
@@ -65,6 +66,7 @@ class Home extends Component {
               <div className="Home-peers">
                 <Peers carouselConfig={carouselConfig} className="peers-in-sidebar" />
               </div>
+              <HistoryMsgs />
             </div>
           )}
 
