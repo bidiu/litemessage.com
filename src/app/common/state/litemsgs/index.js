@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { genActionCreator, genActionTypeCreator } from '../../../utils/stateUtils';
 import pendingQueue from './pending-queue';
 import { default as litemsgsReducer } from './litemsgs';
+import historyMsgs from './history-msgs';
 
 const genActionType = genActionTypeCreator('litemsgs');
 
@@ -14,6 +15,8 @@ const SET_BLOCK_ID = genActionType('pending_queue/set_block_id');
 const REMOVE_PENDING_MSG = genActionType('pending_queue/remove');
 
 const ADD_LITEMSG = genActionType('litemsgs/add');
+// will add to both `litemsgs` and `historyMsgs`
+const ADD_HISTORY_MSG = genActionType('history_msgs/add');
 
 const setMsg = genActionCreator(SET_MSG, 'litemsg', 'nextPendingId');
 const sendMsg = genActionCreator(SEND_MSG, 'pendingId', 'sentAt');
@@ -23,11 +26,13 @@ const setBlockId = genActionCreator(SET_BLOCK_ID, 'litemsgId', 'blockId');
 const removePendingMsg = genActionCreator(REMOVE_PENDING_MSG, 'pendingId');
 
 const addLitemsg = genActionCreator(ADD_LITEMSG, 'litemsg');
+// will add to both `litemsgs` and `historyMsgs`
+const addHistoryMsg = genActionCreator(ADD_HISTORY_MSG, 'litemsg', 'blockId');
 
-const litemsgs = combineReducers({ pendingQueue, litemsgs: litemsgsReducer });
+const litemsgs = combineReducers({ pendingQueue, litemsgs: litemsgsReducer, historyMsgs });
 
 export default litemsgs;
-
+ 
 export {
   setMsg, SET_MSG,
   sendMsg, SEND_MSG,
@@ -36,4 +41,5 @@ export {
   setBlockId, SET_BLOCK_ID,
   removePendingMsg, REMOVE_PENDING_MSG,
   addLitemsg, ADD_LITEMSG,
+  addHistoryMsg, ADD_HISTORY_MSG,
 };

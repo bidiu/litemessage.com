@@ -72,6 +72,9 @@ class Home extends Component {
 
           {/* main */}
           <div className="Home-main">
+            {viewportType !== 'VIEWPORT_DESKTOP' && (
+              <HistoryMsgs />
+            )}
             <PendingMsgs />
             <Chain blocklist={blocklist} />
           </div>

@@ -1,0 +1,14 @@
+@import '_common';
+
+.HistoryMsg {
+  padding: 10px 12px 6px 12px;
+}
+
+.HistoryMsg .hm-content {
+  margin-top: 6px;
+}
+
+.HistoryMsg .hm-utc {
+  color: $text-color-var4;
+  margin-top: 4px;
+}

@@ -6,4 +6,18 @@
   box-sizing: border-box;
   padding: 16px 0;
   border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.HistoryMsgs .hms-header {
+  padding: 0 12px 12px 12px;
+}
+
+.HistoryMsgs .hms-content {
+  min-height: 180px;
+}
+
+.HistoryMsgs .hms-empty {
+  text-align: center;
+  padding: 80px 12px 0 12px;
 }
